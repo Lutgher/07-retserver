@@ -6,7 +6,11 @@ const mongoose=require('mongoose');
 
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
-app.use(require('./routes/usuario'));
+// app.use(require('./routes/usuario'));
+// app.use(require('./routes/login'));
+
+//configuración global de rutas
+app.use(require('./routes/index'));
 
 mongoose.Promise=global.Promise;
 // mongoose.connect(process.env.URLDB, { useNewUrlParser: true },(err, res)=>{

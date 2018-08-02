@@ -2,9 +2,17 @@ const express=require('express'),
     bcrypt=require('bcrypt'),
     _ =require('underscore'),//se usa de forma para ocultar objetos
     app=express(),
-    Usuario=require('../models/usuario');
+    Usuario=require('../models/usuario'),
+    { verificaToken, verificaAdmin }=require('../middlewares/autenticacion');
 
-app.get('/usuario',(req, res)=>{
+app.get('/usuario', verificaToken, (req, res)=>{
+
+    // return res.json({
+    //     usuario: req.usuario,
+    //     nombre: req.usuario.nombre,
+    //     email: req.usuario.email
+    // });
+
     let desde=req.query.desde || 0;
     desde= Number(desde);
     let limite=req.query.limite || 5;
@@ -31,7 +39,7 @@ app.get('/usuario',(req, res)=>{
     });
 });
 
-app.post('/usuario',(req, res)=>{
+app.post('/usuario', [verificaToken, verificaAdmin],(req, res)=>{
     let body=req.body;
 
     let usuario=new Usuario({
@@ -61,7 +69,7 @@ app.post('/usuario',(req, res)=>{
     });
 });
 
-app.put('/usuario/:id?',(req, res)=>{
+app.put('/usuario/:id?', [verificaToken, verificaAdmin],(req, res)=>{
     let id=req.params.id;
     //let body=req.body;
 
@@ -86,7 +94,7 @@ app.put('/usuario/:id?',(req, res)=>{
     });
 });
 
-app.delete('/usuario/:id',(req, res)=>{
+app.delete('/usuario/:id', [verificaToken, verificaAdmin],(req, res)=>{
     
     let id=req.params.id;
 

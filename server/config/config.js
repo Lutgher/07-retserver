@@ -18,7 +18,7 @@ Vencimiento del Token
 //60 minutos
 //24 horas
 //30 días
-process.env.CADUCIDAD_TOKEN = 60*60*24*30;
+process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;
 
 /*==================
 SEED de autenticación
@@ -37,3 +37,9 @@ if(process.env.NODE_ENV ==='dev'){
     urlDB=process.env.MONGO_URI;
 }
 process.env.URLDB = urlDB;
+
+/*==================
+Google client ID
+===================*/
+
+process.env.CLIENT_ID = process.env.CLIENT_ID || '514847810623-p505l1b3glmkq92ptrn1npuo9fd55n0t.apps.googleusercontent.com';

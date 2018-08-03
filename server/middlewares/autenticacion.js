@@ -22,9 +22,6 @@ let verificaToken = (req, res, next)=>{
         next();
     });
 
-    // res.json({token: token});
-    console.log(token);
-    
 
 };
 
@@ -46,7 +43,6 @@ let verificaAdmin=(req, res, next)=>{
         });
     }
 };
-
 module.exports={
     verificaToken, 
     verificaAdmin

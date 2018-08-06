@@ -23,7 +23,7 @@ app.get('/usuario', verificaToken, (req, res)=>{
         .limit(limite)//mostrar una cantidad asignada
         .exec((err,usuarios)=>{
             if(err){
-                return res.status(400).json({
+                return res.status(500).json({
                     ok: true,
                     err
                 });
@@ -55,7 +55,7 @@ app.post('/usuario', [verificaToken, verificaAdmin],(req, res)=>{
     
     usuario.save((err, usuariodb)=>{
         if(err){
-           return res.status(400).json({
+           return res.status(500).json({
                 ok: false,
                 error: err
             });
@@ -80,15 +80,15 @@ app.put('/usuario/:id?', [verificaToken, verificaAdmin],(req, res)=>{
 
     Usuario.findByIdAndUpdate(id, body, {new: true, runValidators: true},(err, usuariodb)=>{
         if(err){
-            return res.status(400).json({
+            return res.status(500).json({
                  ok: false,
                  error: err
              });
          }
-
+         
         res.json({
             ok:true,
-            usuario:usuariodb    
+            usuario: usuariodb    
         }); 
 
     });
